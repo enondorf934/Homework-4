@@ -76,6 +76,7 @@ public final class View
 
 	private Vector[] outerHexagon = new Vector[7];
 	private Vector[] outerCircle = new Vector[33];
+	private Vector[] outerOddShape = new Vector[10];
 
 	//**********************************************************************
 	// Constructors and Finalizer
@@ -341,7 +342,25 @@ public final class View
 		}
 		else if(polygonType == 4) //odd shape 
 		{
+			outerOddShape[0] = new Vector(.9, -.7);
+			outerOddShape[1] = new Vector(.9, -.1);
+			outerOddShape[2] = new Vector(.5, .8);
+			outerOddShape[3] = new Vector(0, .9);
+			outerOddShape[4] = new Vector(-.4, .7);
+			outerOddShape[5] = new Vector(-.7, .4);
+			outerOddShape[6] = new Vector(-.9, .0);
+			outerOddShape[7] = new Vector(-.75, -.4);
+			outerOddShape[8] = new Vector(-.5, -.6);
+			outerOddShape[9] = new Vector(.7, -.9);
 
+			gl.glColor3f(1.0f, 0f, 0f);
+			gl.glBegin(GL.GL_LINE_LOOP);
+
+			for(int k = 0; k<outerOddShape.length; k++)
+			{
+				gl.glVertex2d(outerOddShape[k].x, outerOddShape[k].y);
+			}
+			gl.glEnd();
 		}
 		
 	}
@@ -435,7 +454,36 @@ public final class View
 		}
 		else if(polygonType == 4)
 		{
-			
+			double nextx = point.x + speedx;
+			double nexty = point.y + speedy;
+
+			boolean isReflected = false;
+
+			for(int i = 0; i<outerOddShape.length; i++)
+			{
+				if(i+1 < outerOddShape.length)
+				{
+					if(crossproduct(outerOddShape[i], outerOddShape[i+1], nextx, nexty) > 0)
+					{
+						isReflected = true;
+					}
+				}
+				else
+				{
+					if(crossproduct(outerOddShape[i], outerOddShape[0], nextx, nexty) > 0)
+					{
+						isReflected = true;
+					}
+				}
+			}
+
+			if(isReflected)
+			{
+				setSpeedX(speedx * -1);
+				setSpeedY(speedy * -1);
+			}
+
+			setPoint(new Point2D.Double(point.x + speedx, point.y + speedy));
 		}
 
 

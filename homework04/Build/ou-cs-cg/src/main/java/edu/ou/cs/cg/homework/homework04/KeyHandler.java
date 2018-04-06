@@ -69,15 +69,19 @@ public final class KeyHandler extends KeyAdapter
 				view.setSpeedY(view.getSpeedY() * 1.1);
 				break;
 			case KeyEvent.VK_1:
+				view.setPoint(new Point2D.Double(0, 0));
 				view.setPolygonType(1);
 				break;
 			case KeyEvent.VK_2:
+				view.setPoint(new Point2D.Double(0, 0));
 				view.setPolygonType(2);
 				break;
 			case KeyEvent.VK_3:
+				view.setPoint(new Point2D.Double(0, 0));
 				view.setPolygonType(3);
 				break;
 			case KeyEvent.VK_4:
+				view.setPoint(new Point2D.Double(0, 0));
 				view.setPolygonType(4);
 				break;
 			case KeyEvent.VK_DELETE:
